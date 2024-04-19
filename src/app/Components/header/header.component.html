@@ -1,0 +1,33 @@
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side">
+
+      <div class="botones_menu">
+        <p class="titulo">Rick & Morty API</p>
+        <button (click)="showFiller = !showFiller" mat-raised-button>
+          Personajes
+        </button>
+        <button (click)="showFiller = !showFiller" mat-raised-button>
+          Episodios
+        </button>
+        <button (click)="showFiller = !showFiller" mat-raised-button>
+          Localizaciones
+        </button>
+      </div>
+
+  </mat-drawer>
+
+  <section class="example-sidenav-content">
+    <div class="example-sidenav-content" *ngIf="isMenuOpen; else elseBlock">
+      <button type="button" mat-button (click)="drawer.toggle()" (click)="isMenuOpen=false">
+        Cerrar menú
+      </button>
+    </div>
+    <ng-template #elseBlock>
+      <div class="example-sidenav-content">
+        <button type="button" mat-button (click)="drawer.toggle()" (click)="isMenuOpen=true">
+          Abrir menú
+        </button>
+      </div>
+    </ng-template>
+  </section>
+</mat-drawer-container>
