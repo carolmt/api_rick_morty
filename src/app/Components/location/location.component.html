@@ -1,1 +1,53 @@
-<p>location works!</p>
+<div style="padding: 30px">
+    <div class="informacion_paginas">
+      <button
+        [disabled]="deshabilitado"
+        (click)="previousPageForLess()"
+        [disabled]="page <= 1"
+      >
+        Página anterior
+      </button>
+      <button
+        (click)="nextPageForMore(); habilitarBoton()"
+        [disabled]="page >= 7"
+      >
+        Página siguiente
+      </button>
+  
+      <p>Página actual: {{ page }}</p>
+      <p>Total de páginas: {{ infoClass.pages }}</p>
+      <p>Total personajes: {{ infoClass.count }}</p>
+    </div>
+  
+    <table class="tabla">
+      <caption class="titulo">
+        Lista de localizaciones
+      </caption>
+      <thead>
+        <tr>
+          <th class="tabla_encabezados">ID</th>
+          <th class="tabla_encabezados">Nombre</th>
+          <th class="tabla_encabezados">Tipo</th>
+          <th class="tabla_encabezados">Dimensión</th>
+          <th class="tabla_encabezados">Residentes</th>
+          <th class="tabla_encabezados">Url</th>
+          <th class="tabla_encabezados">Creado</th>
+        </tr>
+      </thead>
+  
+      <tbody>
+        @for (localizacion of localizaciones; track localizacion.id) {
+        <tr>
+          <td class="row">{{ localizacion.id }}</td>
+          <td>{{ localizacion.name }}</td>
+          <td>{{ localizacion.type }}</td>
+          <td>{{ localizacion.dimension }}</td>
+          <td>{{ localizacion.residents }}</td>
+          <td>{{ localizacion.url }}</td>
+          <td>{{ localizacion.created }}</td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  

@@ -4,11 +4,12 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { PersonajesComponent } from '../personajes/personajes.component';
 import { Router } from '@angular/router';
+import { LocationComponent } from '../location/location.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [MaterialModule, CommonModule, RouterOutlet, PersonajesComponent],
+  imports: [MaterialModule, CommonModule, RouterOutlet, PersonajesComponent, LocationComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
@@ -20,5 +21,9 @@ export class HeaderComponent {
 
   navigateToPersonajes(): void {
     this.router.navigate(['/personajes']);
+  }
+
+  navigateToLocation(): void {
+    this.router.navigate(['/locations']);
   }
 }
