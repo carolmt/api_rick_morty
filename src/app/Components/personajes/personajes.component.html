@@ -1,1 +1,67 @@
-<p>personajes works!</p>
+<div style="padding: 30px">
+  <div class="informacion_paginas">
+    <button
+      [disabled]="deshabilitado"
+      (click)="previousPageForLess()"
+      [disabled]="page <= 1"
+    >
+      Página anterior
+    </button>
+    <button
+      (click)="nextPageForMore(); habilitarBoton()"
+      [disabled]="page >= 42"
+    >
+      Página siguiente
+    </button>
+
+    <p>Página actual: {{ page }}</p>
+    <p>Total de páginas: {{ infoClass.pages }}</p>
+    <p>Total personajes: {{ infoClass.count }}</p>
+  </div>
+
+  <table class="tabla">
+    <caption class="titulo">
+      Lista de personajes
+    </caption>
+    <thead>
+      <tr>
+        <th class="tabla_encabezados">ID</th>
+        <th class="tabla_encabezados">Nombre</th>
+        <th class="tabla_encabezados">Estado</th>
+        <th class="tabla_encabezados">Especie</th>
+        <th class="tabla_encabezados">Tipo</th>
+        <th class="tabla_encabezados">Genero</th>
+        <th class="tabla_encabezados">Origen</th>
+        <th class="tabla_encabezados">Ubicación</th>
+        <th class="tabla_encabezados">Imagen</th>
+        <th class="tabla_encabezados">URL</th>
+        <th class="tabla_encabezados">Creación</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (personaje of personajeList; track personaje.id) {
+      <tr>
+        <td class="row">{{ personaje.id }}</td>
+        <td>{{ personaje.name }}</td>
+        <td>{{ personaje.status }}</td>
+        <td>{{ personaje.species }}</td>
+        <td>{{ personaje.type }}</td>
+        <td>{{ personaje.gender }}</td>
+        <td>{{ personaje.origin.name }}</td>
+        <td>{{ personaje.location.url }}</td>
+        <td>
+          <img
+            width="50"
+            height="60"
+            src="{{ personaje.image }}"
+            alt="img personaje"
+          />
+        </td>
+        <td>{{ personaje.url }}</td>
+        <td>{{ personaje.created }}</td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>

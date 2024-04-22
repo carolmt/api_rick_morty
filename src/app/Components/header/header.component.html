@@ -3,7 +3,7 @@
 
       <div class="botones_menu">
         <p class="titulo">Rick & Morty API</p>
-        <button (click)="showFiller = !showFiller" mat-raised-button>
+        <button (click)="showFiller = !showFiller ; navigateToPersonajes()" mat-raised-button>
           Personajes
         </button>
         <button (click)="showFiller = !showFiller" mat-raised-button>
@@ -31,3 +31,4 @@
     </ng-template>
   </section>
 </mat-drawer-container>
+<router-outlet></router-outlet>

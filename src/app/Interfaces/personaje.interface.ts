@@ -1,9 +1,9 @@
-export interface Personaje {
-    info:    Info;
+export interface Info {
+    info:    InfoClass;
     results: Result[];
 }
 
-export interface Info {
+export interface InfoClass {
     count: number;
     pages: number;
     next:  string;
@@ -23,6 +23,7 @@ export interface Result {
     episode:  string[];
     url:      string;
     created:  Date;
+    child: Location;
 }
 
 export enum Gender {
