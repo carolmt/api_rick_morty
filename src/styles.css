@@ -2,3 +2,34 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.titulo {
+    color: #0a8b2c;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .tabla{
+      width: 100%;
+      border-collapse: separate;
+      margin-top: 20px;
+      border: black 1px solid;
+      border-collapse: collapse;
+  }
+  
+  .tabla_encabezados {
+      background-color: #0a8b2c;
+      border: white 3px solid;
+      font-size: 20px;
+      padding: 35px;
+      color: white;
+  }
+  td {
+      border: white 3px solid;
+      padding: 10px;
+      text-align: center;
+      color: white;
+      background-color: #050529ea;
+  }
