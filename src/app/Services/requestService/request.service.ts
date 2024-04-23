@@ -27,6 +27,21 @@ export class RequestService {
     return this.httpClient.get(URL_BASE + "/location", { headers }).pipe(res => res);
   }
 
+  getEpisodes(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json; charset=UTF-8',
+    });
+      return this.httpClient.get(URL_BASE + "/episode", { headers }).pipe(res => res);
+  }
+
+  getMoreInfo(idPersonaje :number): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json; charset=UTF-8',
+    });
+    return this.httpClient.get(URL_BASE + "/character/" + idPersonaje, { headers }).pipe(res => res);
+  }
+
+
   nextPage(element:string, page:number): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json; charset=UTF-8',
@@ -41,5 +56,11 @@ export class RequestService {
       return this.httpClient.get(URL_BASE + element+ page, { headers }).pipe(res => res);
   }
 
+  filterByGender(gender: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json; charset=UTF-8',
+    });
+    return this.httpClient.get(URL_BASE + "/character/?gender=" + gender, { headers }).pipe(res => res); 
+  }
   
 }

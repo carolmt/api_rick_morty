@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Router } from 'express';
 import { InfoClass, Location } from '../../Interfaces/location.interface';
 import { RequestService } from '../../Services/requestService/request.service';
 

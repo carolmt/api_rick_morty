@@ -1,0 +1,40 @@
+
+    <table class="tabla">
+      <caption class="titulo">
+        Información
+      </caption>
+      <thead>
+        <tr>
+          <th class="tabla_encabezados">ID</th>
+          <th class="tabla_encabezados">Nombre</th>
+          <th class="tabla_encabezados">Estado</th>
+          <th class="tabla_encabezados">Especie</th>
+          <th class="tabla_encabezados">Tipo</th>
+          <th class="tabla_encabezados">Género</th>
+          <th class="tabla_encabezados">Origen</th>
+          <th class="tabla_encabezados">Localización</th>
+          <th class="tabla_encabezados">Imagen</th>
+          <th class="tabla_encabezados">Episodio</th>
+          <th class="tabla_encabezados">Url</th>
+          <th class="tabla_encabezados">Creado</th>
+        </tr>
+      </thead>
+  
+      <tbody>
+        @for (personaje of personajeInfo; track personaje.id) {
+        <tr>
+          <td class="row">{{ personaje.id }}</td>
+          <td>{{ personaje.name }}</td>
+          <td>{{ personaje.status }}</td>
+          <td>{{ personaje.species }}</td>
+          <td>{{ personaje.type }}</td>
+          <td>{{ personaje.gender }}</td>
+          <td>{{ personaje.location }}</td>
+          <td>{{ personaje.image }}</td>
+          <td>{{ personaje.episode }}</td>
+          <td>{{ personaje.url }}</td>
+          <td>{{ personaje.created }}</td>
+        </tr>
+        }
+      </tbody>
+    </table>

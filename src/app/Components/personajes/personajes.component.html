@@ -1,67 +1,86 @@
 <div style="padding: 30px">
   <div class="informacion_paginas">
+    
+    <div class="d-grid gap-2 d-md-block">
     <button
       [disabled]="deshabilitado"
       (click)="previousPageForLess()"
       [disabled]="page <= 1"
+      class="btn btn-dark" 
+      type="button"
     >
       Página anterior
     </button>
     <button
       (click)="nextPageForMore(); habilitarBoton()"
       [disabled]="page >= 42"
+      class="btn btn-dark" 
+      type="button"
     >
       Página siguiente
     </button>
 
+    <p class="titulo">PERSONAJES</p>
+
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Seleccionar
+      </button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#">Vivo</a></li>
+        <li><a class="dropdown-item" href="#">Muerto</a></li>
+        <li><a class="dropdown-item" href="#">Estado desconocido</a></li>
+        <li><a class="dropdown-item" href="#">Hombre</a></li>
+        <li><a class="dropdown-item" href="#">Mujer</a></li>
+        <li><a class="dropdown-item" href="#">Género desconocido</a></li>
+        <li><a class="dropdown-item" href="#">Sin género</a></li>
+        <li><a class="dropdown-item" href="#">Alien</a></li>
+        <li><a class="dropdown-item" href="#">Humano</a></li>
+      </ul>
+    </div>
+    
+  </div>
+
+
+<div class = info_pages>
     <p>Página actual: {{ page }}</p>
     <p>Total de páginas: {{ infoClass.pages }}</p>
     <p>Total personajes: {{ infoClass.count }}</p>
   </div>
+  </div>
 
-  <table class="tabla">
-    <caption class="titulo">
-      Lista de personajes
-    </caption>
-    <thead>
-      <tr>
-        <th class="tabla_encabezados">ID</th>
-        <th class="tabla_encabezados">Nombre</th>
-        <th class="tabla_encabezados">Estado</th>
-        <th class="tabla_encabezados">Especie</th>
-        <th class="tabla_encabezados">Tipo</th>
-        <th class="tabla_encabezados">Genero</th>
-        <th class="tabla_encabezados">Origen</th>
-        <th class="tabla_encabezados">Ubicación</th>
-        <th class="tabla_encabezados">Imagen</th>
-        <th class="tabla_encabezados">URL</th>
-        <th class="tabla_encabezados">Creación</th>
-      </tr>
-    </thead>
+  
+  <div class="row row-cols-1 row-cols-md-4 g-4" style=" margin-top: 20px;">
+    @for (personaje of personajeList; track personaje.id) {
+    <div class="col">
+      <div class="card">
+        <img
+          src="{{ personaje.image }}"
+          class="card-img-top"
+          alt="img personaje"
+          width="150"
+          height="260"
+        />
 
-    <tbody>
-      @for (personaje of personajeList; track personaje.id) {
-      <tr>
-        <td class="row">{{ personaje.id }}</td>
-        <td>{{ personaje.name }}</td>
-        <td>{{ personaje.status }}</td>
-        <td>{{ personaje.species }}</td>
-        <td>{{ personaje.type }}</td>
-        <td>{{ personaje.gender }}</td>
-        <td>{{ personaje.origin.name }}</td>
-        <td>{{ personaje.location.url }}</td>
-        <td>
-          <img
-            width="50"
-            height="60"
-            src="{{ personaje.image }}"
-            alt="img personaje"
-          />
-        </td>
-        <td>{{ personaje.url }}</td>
-        <td>{{ personaje.created }}</td>
-      </tr>
-      }
-    </tbody>
-  </table>
+        <div class="card-body">
+          <h5 class="card-title">{{ personaje.name | uppercase }}</h5>
+        </div>
+
+        <ng-container [ngSwitch]="personaje.status" >
+          <p *ngSwitchCase="'Dead'" style="color: red" class="descripcion_Carta" >{{personaje.status}}</p>
+          <p *ngSwitchCase="'Alive'" style="color: green" class="descripcion_Carta">{{personaje.status}}</p>
+          <p *ngSwitchDefault class="descripcion_Carta">{{personaje.status}}</p>
+      </ng-container>
+
+      <div class="d-grid gap-2">
+        <button 
+        (click)=" moreInfo(personaje.id)"
+        class="btn btn-dark"  type="button">Más información
+     </button>
+      </div>
+
+      </div>
+    </div>
+    }
+  </div>
 </div>

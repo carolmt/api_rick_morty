@@ -1,12 +1,15 @@
 import { Component, inject, LOCALE_ID, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, Router } from '@angular/router';
 import { Result, Location, Info, InfoClass } from '../../Interfaces/personaje.interface';
 import { RequestService } from '../../Services/requestService/request.service';
+import { CommonModule, CurrencyPipe, DatePipe, UpperCasePipe } from '@angular/common';
+import { InfoPersonajeComponent } from '../info-personaje/info-personaje.component';
+import { NumberValueAccessor } from '@angular/forms';
 
 @Component({
   selector: 'app-personajes',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, UpperCasePipe, DatePipe, CurrencyPipe, CommonModule, InfoPersonajeComponent],
   templateUrl: './personajes.component.html',
   styleUrl: './personajes.component.css'
 })
@@ -23,7 +26,7 @@ export class PersonajesComponent implements OnInit{
   infoClass: InfoClass = { count: 826, pages: 42, next: this.URL_BASE+this.page, prev: null };
  
 
-  constructor(private requestService: RequestService) {  }
+  constructor(private requestService: RequestService, private router: Router) {  }
 
   ngOnInit(): void {
     console.log('PersonajesComponent initialized');
@@ -41,6 +44,11 @@ export class PersonajesComponent implements OnInit{
     })
   }
 
+  navigateToInfoPersonaje(): void {
+    this.router.navigate(['/info-personaje']);
+  }
+
+
   nextPageForMore() {
     this.page = this.page + 1;
 
@@ -53,6 +61,17 @@ export class PersonajesComponent implements OnInit{
       }
     })
   }
+
+  moreInfo(idPersonaje: number) {
+    this.requestService.getMoreInfo(idPersonaje).subscribe({
+      next: (result) =>{
+        this.personajeList = result.results;
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
+}
 
   previousPageForLess() {
     this.page = this.page - 1;

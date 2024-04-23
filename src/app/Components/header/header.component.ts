@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 import { MaterialModule } from '../../material.module';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, Router } from '@angular/router';
 import { PersonajesComponent } from '../personajes/personajes.component';
-import { Router } from '@angular/router';
 import { LocationComponent } from '../location/location.component';
+import { EpisodeComponent } from '../episode/episode.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [MaterialModule, CommonModule, RouterOutlet, PersonajesComponent, LocationComponent],
+  imports: [MaterialModule, CommonModule, RouterOutlet, PersonajesComponent, LocationComponent, EpisodeComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
@@ -23,7 +23,11 @@ export class HeaderComponent {
     this.router.navigate(['/personajes']);
   }
 
-  navigateToLocation(): void {
+  navigateToLocations(): void {
     this.router.navigate(['/locations']);
+  }
+
+  navigateToEpisodes(): void {
+    this.router.navigate(['/episodes']);
   }
 }
