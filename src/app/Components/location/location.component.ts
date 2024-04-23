@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Router } from 'express';
 import { InfoClass, Location } from '../../Interfaces/location.interface';
-import { LocationService } from '../../Services/location.service';
+import { RequestService } from '../../Services/requestService/request.service';
 
 @Component({
   selector: 'app-location',
@@ -15,13 +15,14 @@ import { LocationService } from '../../Services/location.service';
 export class LocationComponent implements OnInit{
 
   URL_BASE = 'https://rickandmortyapi.com/api/location?page=';
+  element = '/location?page=';
 
   deshabilitado: boolean = true;
   localizaciones: Location[] = [];
   page = 1;
   infoClass: InfoClass = { count: 126, pages: 7, next: this.URL_BASE+this.page, prev: null };
  
-  constructor(private locationService: LocationService) {  }
+  constructor(private requestService: RequestService) {  }
 
   ngOnInit(): void {
     console.log('LocationComponent initialized');
@@ -29,7 +30,7 @@ export class LocationComponent implements OnInit{
   }
 
   getAllLocations() {
-    this.locationService.getLocations().subscribe({
+    this.requestService.getLocations().subscribe({
       next: (result) => {
         this.localizaciones = result.results;
       },
@@ -42,7 +43,7 @@ export class LocationComponent implements OnInit{
   nextPageForMore() {
     this.page = this.page + 1;
 
-    this.locationService.nextPage(this.page).subscribe({
+    this.requestService.nextPage(this.element, this.page).subscribe({
       next: (result) => {
         this.localizaciones = result.results;
       },
@@ -55,7 +56,7 @@ export class LocationComponent implements OnInit{
   previousPageForLess() {
     this.page = this.page - 1;
 
-    this.locationService.previousPage(this.page).subscribe({
+    this.requestService.previousPage(this.element, this.page).subscribe({
       next: (result) => {
         this.localizaciones = result.results;
       },
