@@ -15,6 +15,9 @@ import { NumberValueAccessor } from '@angular/forms';
 })
 
 export class PersonajesComponent implements OnInit{
+Number(arg0: string) {
+throw new Error('Method not implemented.');
+}
 
   URL_BASE = 'https://rickandmortyapi.com/api/character?page=';
   element = '/character?page=';
@@ -23,14 +26,40 @@ export class PersonajesComponent implements OnInit{
   personajeList: Result[] = [];
   localizacion: Location[] = [];
   page = 1;
-  infoClass: InfoClass = { count: 826, pages: 42, next: this.URL_BASE+this.page, prev: null };
+  pages: InfoClass[] = [];
+  total_pages : number = 0;
+  total_characters: number = 0;
  
 
   constructor(private requestService: RequestService, private router: Router) {  }
 
-  ngOnInit(): void {
+  ngOnInit() {
     console.log('PersonajesComponent initialized');
     this.getAllPersonajes();
+    this.calcularPaginasTotales();
+    this.calcularPersonajesTotales();
+  }
+
+  calcularPaginasTotales(filter: string = '') {
+    this.requestService.filterBy(filter).subscribe({
+      next: (result) => {
+        return this.total_pages = result.info.pages;
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  }
+
+  calcularPersonajesTotales() {
+    this.requestService.getPagesCharacter().subscribe({
+      next: (result) => {
+        return this.total_characters = result.info.count;
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
   }
 
   getAllPersonajes() {
@@ -46,6 +75,28 @@ export class PersonajesComponent implements OnInit{
 
   navigateToInfoPersonaje(): void {
     this.router.navigate(['/info-personaje']);
+  }
+
+  filterBy(filter:string) {
+    this.requestService.filterBy(filter).subscribe({
+      next: (result) => {
+        return this.total_pages = result.info.pages;
+  }}),
+
+  this.requestService.filterBy(filter).subscribe({
+    next: (result) => {
+      return this.total_characters = result.info.count;
+}}),
+
+    this.requestService.filterBy(filter).subscribe({
+      next: (result) => {
+        this.personajeList = result.results;
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
+  
   }
 
 
