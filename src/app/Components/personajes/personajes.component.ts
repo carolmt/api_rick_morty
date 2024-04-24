@@ -21,6 +21,7 @@ throw new Error('Method not implemented.');
 
   URL_BASE = 'https://rickandmortyapi.com/api/character?page=';
   element = '/character?page=';
+  currentFilter: string = '';
 
   deshabilitado: boolean = true;
   personajeList: Result[] = [];
@@ -78,6 +79,8 @@ throw new Error('Method not implemented.');
   }
 
   filterBy(filter:string) {
+    this.currentFilter = filter;
+    this.page = 1;
     this.requestService.filterBy(filter).subscribe({
       next: (result) => {
         return this.total_pages = result.info.pages;
@@ -103,7 +106,20 @@ throw new Error('Method not implemented.');
   nextPageForMore() {
     this.page = this.page + 1;
 
-    this.requestService.nextPage(this.element, this.page).subscribe({
+    this.requestService.changePage(this.currentFilter, this.page).subscribe({
+      next: (result) => {
+        this.personajeList = result.results;
+      },
+      error: (err)=> {
+        console.log(err);
+      }
+    })
+  }
+
+  previousPageForLess() {
+    this.page = this.page - 1;
+
+    this.requestService.changePage(this.currentFilter, this.page).subscribe({
       next: (result) => {
         this.personajeList = result.results;
       },
@@ -124,18 +140,6 @@ throw new Error('Method not implemented.');
     })
 }
 
-  previousPageForLess() {
-    this.page = this.page - 1;
-
-    this.requestService.previousPage(this.element, this.page).subscribe({
-      next: (result) => {
-        this.personajeList = result.results;
-      },
-      error: (err)=> {
-        console.log(err);
-      }
-    })
-  }
 
   habilitarBoton() {
     this.deshabilitado = false;
