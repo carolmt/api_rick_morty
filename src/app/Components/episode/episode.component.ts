@@ -20,7 +20,8 @@ export class EpisodeComponent implements OnInit{
   episodes: Episode[] = [];
   page = 1;
   infoClass: InfoClass = { count: 51, pages: 3, next: this.URL_BASE+this.page, prev: null };
-  // imgPersonajes: string[] = [];
+  imgPersonajes: any[] = [];
+
   // @Input() personajeList: Result[] = [];
 
   constructor(private requestService: RequestService) {  }
@@ -44,6 +45,18 @@ export class EpisodeComponent implements OnInit{
         console.log(err);
       }
     })
+  }
+
+  cargaImg(urls: string[] = []) {
+    this.requestService.getImgChar(urls).subscribe({
+      next: (result: any[]) => {
+        // 'result' es un array con los resultados de las solicitudes
+        this.imgPersonajes = result.map(res => res.image);
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
   }
 
   nextPageForMore() {

@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Observable } from 'rxjs';
+import { forkJoin, Observable, of } from 'rxjs';
 
 const URL_BASE = 'https://rickandmortyapi.com/api';
 
@@ -18,6 +18,19 @@ export class RequestService {
       'Content-Type': 'application/json; charset=UTF-8',
     });
       return this.httpClient.get(URL_BASE + "/character", { headers }).pipe(res => res);
+  }
+  
+  getImgChar(urls: string[] = []): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json; charset=UTF-8',
+    });
+    // Mapeamos cada URL a una solicitud HTTP y retornamos un array de observables
+    const observables = urls.map(url =>
+      this.httpClient.get(url, { headers })
+    );
+
+    // Usamos forkJoin para combinar todas las solicitudes en una sola
+    return forkJoin(observables);
   }
   
   getLocations(): Observable<any> {

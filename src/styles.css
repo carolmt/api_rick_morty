@@ -1,10 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body { height: 100%; 
+}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; 
+    background-image: url(./assets/fondo.jpg);
+    background-size: cover; /* Ajusta la imagen al tamaño de la pantalla */
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
+  background-attachment: fixed; /* Mantiene la imagen fija en su posición */
+}
+
 
 .titulo {
-    color: #0a8b2c;
+    color: #FFFFFF;
     font-size: 40px;
     font-weight: bold;
     text-align: center;
@@ -33,3 +40,4 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
       color: white;
       background-color: #050529ea;
   }
+  
