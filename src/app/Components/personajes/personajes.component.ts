@@ -5,6 +5,7 @@ import { RequestService } from '../../Services/requestService/request.service';
 import { CommonModule, CurrencyPipe, DatePipe, UpperCasePipe } from '@angular/common';
 import { InfoPersonajeComponent } from '../info-personaje/info-personaje.component';
 import { NumberValueAccessor } from '@angular/forms';
+import { PersonajeService } from '../../Services/PersonajeService/personaje.service';
 
 @Component({
   selector: 'app-personajes',
@@ -32,7 +33,7 @@ throw new Error('Method not implemented.');
   total_characters: number = 0;
  
 
-  constructor(private requestService: RequestService, private router: Router) {  }
+  constructor(private requestService: RequestService, private router: Router, private personajeService: PersonajeService) {  }
 
   ngOnInit() {
     console.log('PersonajesComponent initialized');
@@ -106,7 +107,7 @@ throw new Error('Method not implemented.');
   nextPageForMore() {
     this.page = this.page + 1;
 
-    this.requestService.changePage(this.currentFilter, this.page).subscribe({
+    this.personajeService.changePage(this.currentFilter, this.page).subscribe({
       next: (result) => {
         this.personajeList = result.results;
       },
@@ -119,7 +120,7 @@ throw new Error('Method not implemented.');
   previousPageForLess() {
     this.page = this.page - 1;
 
-    this.requestService.changePage(this.currentFilter, this.page).subscribe({
+    this.personajeService.changePage(this.currentFilter, this.page).subscribe({
       next: (result) => {
         this.personajeList = result.results;
       },

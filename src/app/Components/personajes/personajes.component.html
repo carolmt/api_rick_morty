@@ -1,16 +1,14 @@
 <div style="padding: 30px">
   <div class="informacion_paginas">
-
     <p>Página actual: {{ page }}</p>
-    <p>Total de páginas: {{total_pages}} </p>
-    <p>Total de personajes: {{total_characters}}</p>
-    
-      
+    <p>Total de páginas: {{ total_pages }}</p>
+    <p>Total de personajes: {{ total_characters }}</p>
+
     <button
       [disabled]="deshabilitado"
       (click)="previousPageForLess()"
       [disabled]="page <= 1"
-      class="btn btn-dark" 
+      class="btn btn-dark"
       type="button"
     >
       Página anterior
@@ -18,38 +16,55 @@
     <button
       (click)="nextPageForMore(); habilitarBoton()"
       [disabled]="page >= total_pages"
-      class="btn btn-dark" 
+      class="btn btn-dark"
       type="button"
     >
       Página siguiente
     </button>
-  
+
     <p class="titulo">PERSONAJES</p>
 
     <div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <button
+        class="btn btn-secondary dropdown-toggle"
+        type="button"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
         Seleccionar
       </button>
       <ul class="dropdown-menu">
-        <li><a (click)="filterBy('Todos')" class="dropdown-item" >Todos los personajes</a></li>
-        <li><a (click)="filterBy('Alive')" class="dropdown-item" >Vivo</a></li>
-        <li><a (click)="filterBy('Dead')" class="dropdown-item" >Muerto</a></li>
-        <li><a (click)="filterBy('unknown')" class="dropdown-item" >Estado desconocido</a></li>
-        <li><a (click)="filterBy('Male')" class="dropdown-item" >Hombre</a></li>
-        <li><a (click)="filterBy('Female')" class="dropdown-item" >Mujer</a></li>
-        <li><a (click)="filterBy('unknown')" class="dropdown-item" >Género desconocido</a></li>
-        <li><a (click)="filterBy('genderless')" class="dropdown-item" >Sin género</a></li>
-        <li><a (click)="filterBy('Alien')" class="dropdown-item" >Alien</a></li>
-        <li><a (click)="filterBy('Human')" class="dropdown-item" >Humano</a></li>
+        <li>
+          <a (click)="filterBy('Todos')" class="dropdown-item"
+            >Todos los personajes</a
+          >
+        </li>
+        <li><a (click)="filterBy('Alive')" class="dropdown-item">Vivo</a></li>
+        <li><a (click)="filterBy('Dead')" class="dropdown-item">Muerto</a></li>
+        <li>
+          <a (click)="filterBy('unknown')" class="dropdown-item"
+            >Estado desconocido</a
+          >
+        </li>
+        <li><a (click)="filterBy('Male')" class="dropdown-item">Hombre</a></li>
+        <li><a (click)="filterBy('Female')" class="dropdown-item">Mujer</a></li>
+        <li>
+          <a (click)="filterBy('unknown')" class="dropdown-item"
+            >Género desconocido</a
+          >
+        </li>
+        <li>
+          <a (click)="filterBy('genderless')" class="dropdown-item"
+            >Sin género</a
+          >
+        </li>
+        <li><a (click)="filterBy('Alien')" class="dropdown-item">Alien</a></li>
+        <li><a (click)="filterBy('Human')" class="dropdown-item">Humano</a></li>
       </ul>
     </div>
-    
   </div>
 
-
-
-  
-  <div class="row row-cols-1 row-cols-md-4 g-4" style=" margin-top: 20px;">
+  <div class="row row-cols-1 row-cols-md-4 g-4" style="margin-top: 20px">
     @for (personaje of personajeList; track personaje.id) {
     <div class="col">
       <div class="card">
@@ -65,19 +80,35 @@
           <h5 class="card-title">{{ personaje.name | uppercase }}</h5>
         </div>
 
-        <ng-container [ngSwitch]="personaje.status" >
-          <p *ngSwitchCase="'Dead'" style="color: red" class="descripcion_Carta" >{{personaje.status}}</p>
-          <p *ngSwitchCase="'Alive'" style="color: green" class="descripcion_Carta">{{personaje.status}}</p>
-          <p *ngSwitchDefault class="descripcion_Carta">{{personaje.status}}</p>
-      </ng-container>
+        <ng-container [ngSwitch]="personaje.status">
+          <p
+            *ngSwitchCase="'Dead'"
+            style="color: red"
+            class="descripcion_Carta"
+          >
+            {{ personaje.status }}
+          </p>
+          <p
+            *ngSwitchCase="'Alive'"
+            style="color: green"
+            class="descripcion_Carta"
+          >
+            {{ personaje.status }}
+          </p>
+          <p *ngSwitchDefault class="descripcion_Carta">
+            {{ personaje.status }}
+          </p>
+        </ng-container>
 
-      <div class="d-grid gap-2">
-        <button 
-        (click)=" moreInfo(personaje.id)"
-        class="btn btn-dark"  type="button">Más información
-     </button>
-      </div>
-
+        <div class="d-grid gap-2">
+          <button
+            (click)="moreInfo(personaje.id)"
+            class="btn btn-dark"
+            type="button"
+          >
+            Más información
+          </button>
+        </div>
       </div>
     </div>
     }
